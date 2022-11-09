@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:examination_portal/quizpage.dart';
 
 class endquiz extends StatelessWidget {
   const endquiz({Key? key}) : super(key: key);
@@ -84,7 +85,7 @@ class _EndQuizState extends State<EndQuiz> {
                     ],
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 14.00),
-                  child: Center(child: const Text('100/100', style: TextStyle(color: Color(0xFF2741FF), fontSize: 24, fontWeight: FontWeight.w700)),),
+                  child: Center(child: Text('${ScoreKeeper+1}/${Questions.length}', style: TextStyle(color: Color(0xFF2741FF), fontSize: 24, fontWeight: FontWeight.w700)),),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
