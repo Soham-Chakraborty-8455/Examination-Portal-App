@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1082044667628",
+    "project_id": "examination-portal-49c9a",
+    "storage_bucket": "examination-portal-49c9a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082044667628:android:88667ecdbe662a49a177c9",
+        "android_client_info": {
+          "package_name": "com.example.examination_portal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082044667628-hq8rn394pphs4p98o45l86erek90nhsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCp304-bOCp3ojL1cg6BqGm-16ATIoHf_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082044667628-hq8rn394pphs4p98o45l86erek90nhsb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
