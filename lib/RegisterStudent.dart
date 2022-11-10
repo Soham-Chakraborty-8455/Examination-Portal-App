@@ -1,11 +1,11 @@
-import 'package:examination_portal/RegisterStudent.dart';
-import 'package:examination_portal/quizpage.dart';
 import 'package:flutter/material.dart';
+import 'package:examination_portal/quizpage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:examination_portal/authenticate.dart';
+import 'StudentLogin.dart';
 
-class StudentLogin extends StatelessWidget {
-  const StudentLogin({Key? key}) : super(key: key);
+class RegisterStudent extends StatelessWidget {
+  const RegisterStudent({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class StudentLogin extends StatelessWidget {
                   color: Color(0xFFF0F0F0),
                   borderRadius: BorderRadius.all(Radius.circular(22.00))
               ),
-              child: LoginStudent(),
+              child: registerStudent(),
             ),
           ),
         ),
@@ -28,31 +28,41 @@ class StudentLogin extends StatelessWidget {
   }
 }
 
-class LoginStudent extends StatefulWidget {
-  const LoginStudent({Key? key}) : super(key: key);
+class registerStudent extends StatefulWidget {
+  const registerStudent({Key? key}) : super(key: key);
 
   @override
-  State<LoginStudent> createState() => _LoginStudentState();
+  State<registerStudent> createState() => _registerStudentState();
 }
 
-class _LoginStudentState extends State<LoginStudent> {
+class _registerStudentState extends State<registerStudent> {
+
   TextEditingController emailcontroller=TextEditingController();
   TextEditingController passwordcontroller=TextEditingController();
+  TextEditingController enrollmentcontroller=TextEditingController();
+  TextEditingController namecontroller=TextEditingController();
 
-  @override
-
-  void loginUser() async{
-    String res= await AuthMethods().loginUser(email: emailcontroller.text, password: passwordcontroller.text);
-    if(res=="Success"){
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => quizpage()),
+  void SignUPUser() async{
+    String res= await AuthMethods().SignUpUser(
+        name: namecontroller.text,
+        EnrollmentNumber: enrollmentcontroller.text,
+        email: emailcontroller.text,
+        password: passwordcontroller.text
+    );
+    if(res!="Success"){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(res),)
       );
     }
     else{
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Wrong Email ID/ Phone Number Entered !"),));
+      Navigator.of(context).push(
+        MaterialPageRoute(
+            builder: (context) => quizpage()),
+      );
     }
+
   }
 
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
@@ -72,15 +82,88 @@ class _LoginStudentState extends State<LoginStudent> {
               ),
             ),
           ),
-          Column(
-            children: [
-              Text("LOGIN FOR", style: TextStyle(color: Colors.black, fontSize: 28.00, fontWeight: FontWeight.w700)),
-              Text("EXAMINATION", style: TextStyle(color: Colors.black, fontSize: 28.00, fontWeight: FontWeight.w700)),
-            ],
+          Text("REGISTER YOURSELF", style: TextStyle(color: Colors.black, fontSize: 28.00, fontWeight: FontWeight.w700)),
+          SizedBox(
+            height:5.00,
+          ),
+          //name
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.00),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10.00),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 3.0,
+                      spreadRadius: 3,
+                      offset: Offset(
+                        3,
+                        3,
+                      ),
+                    )
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30.00)
+              ),
+              child: TextField(
+                controller: namecontroller,
+                showCursor: true,
+                decoration: const InputDecoration(
+                  errorBorder: InputBorder.none,
+                  contentPadding: EdgeInsets.only(left:20.00),
+                  labelText: 'Name',
+                  labelStyle: TextStyle(
+                    color: Color(0xFF747677),
+                  ),
+                ),
+              ),
+            ),
           ),
           SizedBox(
             height:5.00,
           ),
+          //enrollment number
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.00),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 10.00),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 3.0,
+                      spreadRadius: 3,
+                      offset: Offset(
+                        3,
+                        3,
+                      ),
+                    )
+                  ],
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30.00)
+              ),
+              child: TextField(
+                controller: enrollmentcontroller,
+                showCursor: true,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  errorBorder: InputBorder.none,
+                  contentPadding: EdgeInsets.only(left:20.00),
+                  labelText: 'Enrollement Number',
+                  labelStyle: TextStyle(
+                    color: Color(0xFF747677),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height:5.00,
+          ),
+          //emailid
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.00),
             child: Container(
@@ -103,12 +186,12 @@ class _LoginStudentState extends State<LoginStudent> {
               ),
               child: TextField(
                 controller: emailcontroller,
-                showCursor: true,
                 keyboardType: TextInputType.emailAddress,
+                showCursor: true,
                 decoration: const InputDecoration(
                   errorBorder: InputBorder.none,
                   contentPadding: EdgeInsets.only(left:20.00),
-                  labelText: 'Email Address',
+                  labelText: 'Email ID',
                   labelStyle: TextStyle(
                     color: Color(0xFF747677),
                   ),
@@ -119,12 +202,13 @@ class _LoginStudentState extends State<LoginStudent> {
           SizedBox(
             height:5.00,
           ),
+          //password
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.00),
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 10.00),
               decoration: BoxDecoration(
-      border: Border.all(color: Colors.black),
+                  border: Border.all(color: Colors.black),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,
@@ -161,41 +245,21 @@ class _LoginStudentState extends State<LoginStudent> {
             padding: const EdgeInsets.symmetric(vertical: 10.00),
             child: GestureDetector(
               onTap: (){
-                loginUser();
+                SignUPUser();
               },
               child: Container(
-                  width: 240.00,
-                  margin: EdgeInsets.symmetric(horizontal: 30.00),
-                  decoration: BoxDecoration(
-                      color: Color(0xFF1029DE),
-                      borderRadius: BorderRadius.all(Radius.circular(22))
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 14.00),
-                  child: Center(child: const Text('Login', style: TextStyle(color: Colors.white, fontSize: 16.00))),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10.00),
-            child: GestureDetector(
-
-              onTap: () {
-                Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => RegisterStudent()),
-                );
-              },
-              child: Text(
-                'Register as Student',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Color(0xFF2741FF),
-                  decoration: TextDecoration.underline,
-                  fontWeight: FontWeight.w700,
-                  //TODO: Create new account OnPressed function call
+                width: 240.00,
+                margin: EdgeInsets.symmetric(horizontal: 30.00),
+                decoration: BoxDecoration(
+                    color: Color(0xFF1029DE),
+                    borderRadius: BorderRadius.all(Radius.circular(22))
                 ),
+                padding: const EdgeInsets.symmetric(vertical: 14.00),
+                child: Center(child: const Text('Register', style: TextStyle(color: Colors.white, fontSize: 16.00))),
               ),
             ),
           ),
+
           SizedBox(
             height:5.00,
           ),
@@ -204,4 +268,3 @@ class _LoginStudentState extends State<LoginStudent> {
     );
   }
 }
-

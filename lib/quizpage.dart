@@ -27,6 +27,8 @@ class quizpage extends StatelessWidget {
 }
 
 
+int final_score=0;
+int total_questions=0;
 
 
 class QuizPage extends StatefulWidget {
@@ -97,37 +99,37 @@ class _QuizPageState extends State<QuizPage> {
               width: 240.00,
               margin: EdgeInsets.symmetric(horizontal: 30.00),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(22)),
-                  border: Border.all(color: Colors.black),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 3.0,
-                        spreadRadius: 3,
-                        offset: Offset(
-                          3,
-                          3,
-                        ),
-                      )
-                    ],
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(22)),
+                border: Border.all(color: Colors.black),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 3.0,
+                    spreadRadius: 3,
+                    offset: Offset(
+                      3,
+                      3,
+                    ),
+                  )
+                ],
               ),
               padding: const EdgeInsets.symmetric(vertical: 14.00),
               child: Center(
                 child: CountdownTimer(
-                  endTime: endTime,
-                  widgetBuilder: (_, time) {
-                    if (time == null) {
-                      return Text('Time over');
-                    }
-                    return Text(
+                    endTime: endTime,
+                    widgetBuilder: (_, time) {
+                      if (time == null) {
+                        return Text('Time over');
+                      }
+                      return Text(
 
-                      '${time.hours}: ${time.min}: ${time.sec}',
-                      style: TextStyle(color: Color(0xFF2741FF),
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700),
-                    );
-                  }
+                        '${time.hours}: ${time.min}: ${time.sec}',
+                        style: TextStyle(color: Color(0xFF2741FF),
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700),
+                      );
+                    }
                 ),
               ),
             ),
@@ -157,7 +159,7 @@ class _QuizPageState extends State<QuizPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5.00),
                 child: Text(
-                  Questions[questionnumber],
+                    Questions[questionnumber],
                     style: TextStyle(color: Colors.black, fontSize: 24, fontWeight: FontWeight.w700)
                 ),
               ),
@@ -166,13 +168,13 @@ class _QuizPageState extends State<QuizPage> {
                 //OPTION 1
                 child: GestureDetector(
                   onTap: (){
-                      setState(() {
-                        container1_color= Color(0xFFBFFF00);
-                        container2_color= Colors.white;
-                        container3_color= Colors.white;
-                        container4_color= Colors.white;
-                        optionbeforenext=1;
-                      });
+                    setState(() {
+                      container1_color= Color(0xFFBFFF00);
+                      container2_color= Colors.white;
+                      container3_color= Colors.white;
+                      container4_color= Colors.white;
+                      optionbeforenext=1;
+                    });
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -231,7 +233,7 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 10.00, horizontal: 30.00),
                     child: Text(
-                    options[questionnumber][1],
+                        options[questionnumber][1],
                         style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
 
                   ),
@@ -269,8 +271,8 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 10.00, horizontal: 30.00),
                     child: Text(
-                      options[questionnumber][2],
-                      style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
+                        options[questionnumber][2],
+                        style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
 
                   ),
                 ),
@@ -278,13 +280,13 @@ class _QuizPageState extends State<QuizPage> {
               //OPTION 4
               GestureDetector(
                 onTap: (){
-                    setState(() {
-                      container1_color= Colors.white;
-                      container2_color= Colors.white;
-                      container3_color= Colors.white;
-                      container4_color= Color(0xFFBFFF00);
-                      optionbeforenext=4;
-                    });
+                  setState(() {
+                    container1_color= Colors.white;
+                    container2_color= Colors.white;
+                    container3_color= Colors.white;
+                    container4_color= Color(0xFFBFFF00);
+                    optionbeforenext=4;
+                  });
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 5.00),
@@ -307,8 +309,8 @@ class _QuizPageState extends State<QuizPage> {
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 10.00, horizontal: 30.00),
                     child: Text(
-                      options[questionnumber][3],
-                      style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
+                        options[questionnumber][3],
+                        style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
 
                   ),
                 ),
@@ -325,18 +327,18 @@ class _QuizPageState extends State<QuizPage> {
                 height: 43.00,
                 width: 43.00,
                 child: FloatingActionButton(
-                    onPressed: (){
-                      setState(() {
-                        if(questionnumber>0){
-                          questionnumber--;
-                        }
-                        optionbeforenext=0;
-                        container1_color=Colors.white;
-                        container2_color=Colors.white;
-                        container3_color=Colors.white;
-                        container4_color=Colors.white;
-                      });
-                    },
+                  onPressed: (){
+                    setState(() {
+                      if(questionnumber>0){
+                        questionnumber--;
+                      }
+                      optionbeforenext=0;
+                      container1_color=Colors.white;
+                      container2_color=Colors.white;
+                      container3_color=Colors.white;
+                      container4_color=Colors.white;
+                    });
+                  },
                   backgroundColor: Color(0xFF2741FF),
                   child: Icon(Icons.arrow_back),
                 ),
@@ -346,6 +348,8 @@ class _QuizPageState extends State<QuizPage> {
                   Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => endquiz()),
                   );
+                  final_score=ScoreKeeper;
+                  total_questions=Questions.length;
                 },
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 30.00),
